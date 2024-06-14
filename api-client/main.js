@@ -3,10 +3,23 @@ const { createApp } = Vue
 createApp({
   data() {
     return {
-        students: []
+        students: [],
+        newStudentName: "",
+        newStudentSurname: ""
     }
   },
   methods: {
+
+    addTask() {
+      console.log("aggiungi task", this.newTask);
+
+      const newStudent = {
+        name: this.newStudentName,
+        last_name: this.newStudentSurname
+      };
+
+      this.students.push(newStudent);
+    }
 
   },
   mounted() {

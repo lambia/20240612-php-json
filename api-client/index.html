@@ -18,6 +18,10 @@
             <li v-for="student in students">{{ student.name }} {{ student.last_name }}</li>
         </ul>
 
+        <input placeholder="Nome" v-model="newStudentName" />
+        <input placeholder="Cognome" v-model="newStudentSurname" />
+        <button v-if="newStudentName.length >= 3 && newStudentSurname.length >= 3" @click="addTask">Aggiungi</button>
+
     </div>
 
     <script src="./main.js"></script>
