@@ -3,12 +3,29 @@ const { createApp } = Vue
 createApp({
   data() {
     return {
+        //Dati locali
         students: [],
         newStudentName: "",
-        newStudentSurname: ""
+        newStudentSurname: "",
+        //Dati per le richieste
+        apiUrl: "../server.php",
+        postRequestConfig: {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        }
     }
   },
   methods: {
+
+    getTasksList() {
+
+      axios.get(this.apiUrl).then(results => {
+        console.log("Risultati: ", results.data);
+        this.students = results.data;
+      });
+
+    },
 
     addTask() {
       console.log("aggiungi task", this.newTask);
@@ -18,16 +35,16 @@ createApp({
         last_name: this.newStudentSurname
       };
 
-      this.students.push(newStudent);
+      axios.post(this.apiUrl, newStudent, this.postRequestConfig).then(results => {
+        console.log("Risultati: ", results.data);
+        this.students = results.data;
+      });
     }
 
   },
   mounted() {
     console.log("Recupero i dati dal server");
-
-    axios.get("../server.php").then(results => {
-        console.log("Risultati: ", results);
-        this.students = results.data;
-    });
+    this.getTasksList();
+    
   }
 }).mount('#app')
