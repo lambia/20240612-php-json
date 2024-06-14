@@ -32,7 +32,8 @@ createApp({
 
       const newStudent = {
         name: this.newStudentName,
-        last_name: this.newStudentSurname
+        last_name: this.newStudentSurname,
+        isIscritto: true
       };
 
       axios.post(this.apiUrl, newStudent, this.postRequestConfig).then(results => {
